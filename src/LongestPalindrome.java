@@ -1,4 +1,32 @@
 import java.util.Scanner;
+public class LongestPalindrome {
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String longestPalindrome = "";
+        String s = sc.nextLine();
+        if (s.isEmpty()) System.out.print("No palindrome, the string is empty ");
+
+        for (int i =0; i < s.length(); i++){
+            String oddPalindrome = findPalindrome(s, i, i);
+            String evenPalindrome = findPalindrome(s, i, i+1);
+            String subLongestPalindrome = (oddPalindrome.length() > evenPalindrome.length()) ? oddPalindrome : evenPalindrome;
+            longestPalindrome = (subLongestPalindrome.length() > longestPalindrome.length()) ? subLongestPalindrome : longestPalindrome ;
+
+        }
+        System.out.println("longestPalindrome is :" + longestPalindrome );
+
+    }
+
+    public static String findPalindrome(String s, int left, int right){
+        while(s != null && left >=0 && right<s.length() && s.charAt(left) == s.charAt(right)){
+            left --;
+            right ++;
+        }
+        return s.substring(left+1, right);
+
+    }
+}
 
 /*
 Every palindrome is either of odd length or even length.
@@ -40,31 +68,3 @@ Step-by-Step Algorithm (Simple Explanation)
 7. After checking all characters
  - Pint the longest palindrome found.
  */
-public class LongestPalindrome {
-    public static void main (String[] args){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String longestPalindrome = "";
-        String s = sc.nextLine();
-        if (s.isEmpty()) System.out.print("No palindrome, the string is empty ");
-
-        for (int i =0; i < s.length(); i++){
-            String oddPalindrome = findPalindrome(s, i, i);
-            String evenPalindrome = findPalindrome(s, i, i+1);
-            String subLongestPalindrome = (oddPalindrome.length() > evenPalindrome.length()) ? oddPalindrome : evenPalindrome;
-            longestPalindrome = (subLongestPalindrome.length() > longestPalindrome.length()) ? subLongestPalindrome : longestPalindrome ;
-
-        }
-        System.out.println("longestPalindrome is :" + longestPalindrome );
-
-    }
-
-    public static String findPalindrome(String s, int left, int right){
-        while(s != null && left >=0 && right<s.length() && s.charAt(left) == s.charAt(right)){
-            left --;
-            right ++;
-        }
-        return s.substring(left+1, right);
-
-    }
-}
